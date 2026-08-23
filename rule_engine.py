@@ -4,15 +4,31 @@ import pandas as pd
 
 
 # LOCATION OF DATA FILES
+
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
+
 # LOAD ALL CSV FILES
+
+
 def load_data():
+
     crops = pd.read_csv(DATA_DIR / "crop.csv")
+
     moisture = pd.read_csv(DATA_DIR / "moisture.csv")
-    recommendations = pd.read_csv(DATA_DIR / "recomendation.csv")
-    storage = pd.read_csv(DATA_DIR / "storage.csv")
-    duration = pd.read_csv(DATA_DIR / "storage_duration.csv",Nencoding="cp1252")
+
+    recommendations = pd.read_csv(
+        DATA_DIR / "recomendation.csv"
+    )
+
+    storage = pd.read_csv(
+        DATA_DIR / "storage.csv"
+    )
+
+    duration = pd.read_csv(
+        DATA_DIR / "storage_duration.csv",
+        encoding="cp1252"
+    )
 
     # Remove spaces around column names
     for df in [
@@ -27,7 +43,11 @@ def load_data():
         # Remove unnecessary spaces from text
         for column in df.columns:
             if df[column].dtype == "object":
-                df[column] = (df[column].astype(str).str.strip())
+                df[column] = (
+                    df[column]
+                    .astype(str)
+                    .str.strip()
+                )
 
     return (
         crops,
@@ -39,8 +59,12 @@ def load_data():
 
 
 # NORMALIZE CROP NAMES
+
+
 def normalize_crop(value):
+
     value = str(value).strip().lower()
+
     if value in ["maize", "corn"]:
         return "Maize"
 
@@ -51,15 +75,26 @@ def normalize_crop(value):
 
 
 # NORMALIZE VARIETY NAMES
+
+
 def normalize_variety(value):
+
     value = str(value).strip().lower()
+
     aliases = {
+
         "white maize": "White",
+
         "yellow maize": "Yellow",
+
         "brown beans": "Brown",
+
         "white beans": "White",
+
         "black-eyed beans": "Black-eyed cowpea",
+
         "black-eyed cowpea": "Black-eyed cowpea",
+
         "flint corn": "Flint corn (Indian corn)",
 
     }
@@ -71,29 +106,38 @@ def normalize_variety(value):
 
 
 # CONVERT MOISTURE VALUES TO NUMBERS
+
 def parse_bound(value):
+
     value = str(value).strip()
+
     value = value.replace("%", "")
+
     match = re.search(
         r"[-+]?\d+(?:\.\d+)?",
         value
     )
 
     if match:
+
         return float(
             match.group()
         )
+
     return None
 
 
 # CHECK MOISTURE
+
 def check_moisture(
     crop,
     variety,
     moisture_value,
     moisture_df
 ):
+
     crop = normalize_crop(crop)
+
     variety = normalize_variety(variety)
 
     # Find matching crop and variety
@@ -117,6 +161,7 @@ def check_moisture(
 
     # No matching rule
     if subset.empty:
+
         return {
 
             "status":
@@ -132,6 +177,7 @@ def check_moisture(
 
     # Check every moisture rule
     for _, row in subset.iterrows():
+
         minimum = parse_bound(
             row["Moisture Min (%)"]
         )
@@ -146,6 +192,7 @@ def check_moisture(
 
         # Example: >15
         if ">" in maximum_text:
+
             if (
                 minimum is not None
                 and moisture_value >= minimum
@@ -166,6 +213,7 @@ def check_moisture(
 
         # Normal range
         else:
+
             if (
                 minimum is not None
                 and maximum is not None
@@ -189,8 +237,11 @@ def check_moisture(
 
     # Moisture does not fall into any rule
     return {
+
         "status": "No rule available",
+
         "action": "Manual review required",
+
         "message": 
             f"No moisture rule covers "
             f"{moisture_value:.1f}%."
@@ -198,8 +249,11 @@ def check_moisture(
 
 
 # NORMALIZE STORAGE METHODS
+
 def normalize_storage_method(value):
+
     value = str(value).strip().lower()
+
     aliases = {
 
         "hermetic bag":
@@ -231,12 +285,16 @@ def normalize_storage_method(value):
 
 
 # CHECK STORAGE METHOD
+
+
 def check_storage(
     crop,
     storage_method,
     storage_df
 ):
+
     crop = normalize_crop(crop)
+
     method = normalize_storage_method(
         storage_method
     )
@@ -258,7 +316,9 @@ def check_storage(
     ]
 
     if subset.empty:
+
         return {
+
             "suitability":
                 "Unknown",
 
@@ -272,6 +332,7 @@ def check_storage(
     row = subset.iloc[0]
 
     return {
+
         "suitability":
             row["Suitability"],
 
@@ -284,6 +345,7 @@ def check_storage(
 
 
 # ASSESS STORAGE RISK
+
 def assess_risk(
     moisture_result,
     storage_result
@@ -307,6 +369,8 @@ def assess_risk(
 
 
     # HIGH MOISTURE
+    
+
     if (
         moisture_status == "high"
         or "dry" in moisture_action
@@ -328,6 +392,8 @@ def assess_risk(
 
 
     # HIGH STORAGE RISK
+
+
     if (
         storage_risk == "high"
         or storage_risk == "very high"
@@ -348,6 +414,8 @@ def assess_risk(
 
 
     # SAFE STORAGE
+
+
     if (
         moisture_status == "safe"
         and storage_suitability == "high"
@@ -369,6 +437,8 @@ def assess_risk(
 
 
     # MODERATE MOISTURE
+    
+
     if moisture_status == "moderate":
 
         return {
@@ -388,6 +458,8 @@ def assess_risk(
 
 
     # UNKNOWN
+    
+
     return {
 
         "risk":
@@ -403,6 +475,7 @@ def assess_risk(
 
 
 # FIND STORAGE DURATION
+
 def find_storage_duration(
     crop,
     moisture_result,
@@ -436,6 +509,7 @@ def find_storage_duration(
 
 
     if subset.empty:
+
         return {
 
             "duration":
@@ -451,6 +525,8 @@ def find_storage_duration(
 
 
     # Match moisture category
+    
+
     moisture_status = str(
         moisture_result["status"]
     ).strip().lower()
@@ -467,11 +543,15 @@ def find_storage_duration(
         )
     ]
 
+
     if not matching_rows.empty:
+
         subset = matching_rows
 
 
     # Convert days to numbers
+    
+
     subset["DaysNum"] = pd.to_numeric(
         subset["Days Since Harvest"],
         errors="coerce"
@@ -483,6 +563,7 @@ def find_storage_duration(
 
 
     if subset.empty:
+
         return {
 
             "duration":
@@ -503,6 +584,8 @@ def find_storage_duration(
 
 
     # EXACT MATCH
+    
+
     exact = subset[
         subset["DaysNum"]
         == days_since_harvest
@@ -510,6 +593,7 @@ def find_storage_duration(
 
 
     if not exact.empty:
+
         row = exact.iloc[0]
 
         return {
@@ -527,6 +611,8 @@ def find_storage_duration(
 
     
     # CLOSEST AVAILABLE RULE
+    
+
     subset["difference"] = (
         subset["DaysNum"]
         - days_since_harvest
@@ -555,6 +641,7 @@ def find_storage_duration(
 
 
 # MAIN ASSESSMENT FUNCTION
+
 def assess(
     crop,
     variety,

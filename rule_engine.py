@@ -4,13 +4,10 @@ import pandas as pd
 
 
 # LOCATION OF DATA FILES
-
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
 
 # LOAD ALL CSV FILES
-
-
 def load_data():
 
     crops = pd.read_csv(DATA_DIR / "crop.csv")
@@ -59,8 +56,6 @@ def load_data():
 
 
 # NORMALIZE CROP NAMES
-
-
 def normalize_crop(value):
 
     value = str(value).strip().lower()
@@ -75,8 +70,6 @@ def normalize_crop(value):
 
 
 # NORMALIZE VARIETY NAMES
-
-
 def normalize_variety(value):
 
     value = str(value).strip().lower()
@@ -106,7 +99,6 @@ def normalize_variety(value):
 
 
 # CONVERT MOISTURE VALUES TO NUMBERS
-
 def parse_bound(value):
 
     value = str(value).strip()
@@ -128,7 +120,6 @@ def parse_bound(value):
 
 
 # CHECK MOISTURE
-
 def check_moisture(
     crop,
     variety,
@@ -249,7 +240,6 @@ def check_moisture(
 
 
 # NORMALIZE STORAGE METHODS
-
 def normalize_storage_method(value):
 
     value = str(value).strip().lower()
@@ -285,8 +275,6 @@ def normalize_storage_method(value):
 
 
 # CHECK STORAGE METHOD
-
-
 def check_storage(
     crop,
     storage_method,
@@ -345,7 +333,6 @@ def check_storage(
 
 
 # ASSESS STORAGE RISK
-
 def assess_risk(
     moisture_result,
     storage_result
@@ -392,8 +379,6 @@ def assess_risk(
 
 
     # HIGH STORAGE RISK
-
-
     if (
         storage_risk == "high"
         or storage_risk == "very high"
@@ -414,8 +399,6 @@ def assess_risk(
 
 
     # SAFE STORAGE
-
-
     if (
         moisture_status == "safe"
         and storage_suitability == "high"
@@ -437,8 +420,6 @@ def assess_risk(
 
 
     # MODERATE MOISTURE
-    
-
     if moisture_status == "moderate":
 
         return {
@@ -458,8 +439,6 @@ def assess_risk(
 
 
     # UNKNOWN
-    
-
     return {
 
         "risk":
@@ -475,7 +454,6 @@ def assess_risk(
 
 
 # FIND STORAGE DURATION
-
 def find_storage_duration(
     crop,
     moisture_result,
@@ -525,8 +503,6 @@ def find_storage_duration(
 
 
     # Match moisture category
-    
-
     moisture_status = str(
         moisture_result["status"]
     ).strip().lower()
@@ -550,8 +526,6 @@ def find_storage_duration(
 
 
     # Convert days to numbers
-    
-
     subset["DaysNum"] = pd.to_numeric(
         subset["Days Since Harvest"],
         errors="coerce"
@@ -584,8 +558,6 @@ def find_storage_duration(
 
 
     # EXACT MATCH
-    
-
     exact = subset[
         subset["DaysNum"]
         == days_since_harvest
@@ -611,8 +583,6 @@ def find_storage_duration(
 
     
     # CLOSEST AVAILABLE RULE
-    
-
     subset["difference"] = (
         subset["DaysNum"]
         - days_since_harvest
@@ -641,7 +611,6 @@ def find_storage_duration(
 
 
 # MAIN ASSESSMENT FUNCTION
-
 def assess(
     crop,
     variety,

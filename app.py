@@ -25,6 +25,13 @@ st.write(
     Check the best way to handle your maize and beans in seconds to avoid loss.
     """
 )
+col1, col2, col3 = st.columns([1, 6, 1])
+
+with col2:
+    st.title("🌾 AgroIntel")
+    st.write(
+        "Check the best way to handle your maize and beans in seconds to avoid loss."
+    )
 
 
 # LOAD DATA

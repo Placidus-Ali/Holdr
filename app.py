@@ -1,15 +1,10 @@
 import streamlit as st
-
-from rule_engine import (
-    load_data,
-    assess
-)
+from rule_engine import load_data, assess
 
 
 # PAGE SETTINGS
-
 st.set_page_config(
-    page_title="AgroIntel",
+    page_title="AgroIntelNG",
     page_icon="🌾",
     layout="centered"
 )
@@ -18,21 +13,13 @@ st.set_page_config(
 # PAGE TITLE
 
 
-st.title("🌾 AgroIntel")
+st.title("🌾 AgroIntelNG")
 
 st.write(
     """
     Check the best way to handle your maize and beans in seconds to avoid loss.
     """
 )
-col1, col2, col3 = st.columns([1, 6, 1])
-
-with col2:
-    st.title("🌾 AgroIntel")
-    st.write(
-        "Check the best way to handle your maize and beans in seconds to avoid loss."
-    )
-
 
 # LOAD DATA
 
@@ -467,7 +454,7 @@ if st.button(
 
     st.caption(
         """
-        AgroIntel is a rule-based agricultural
+        AgroIntelNG is a rule-based agricultural
         decision-support system. Recommendations
         are based on the agricultural rules contained
         in the supplied datasets.

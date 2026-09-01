@@ -5,13 +5,13 @@ from rule_engine import load_data, assess
 # PAGE SETTINGS
 st.set_page_config(
     page_title="AgroIntelNG",
-    page_icon="🌾",
+    page_icon="C:/Users/STUTERN/Downloads/Holdr/Holdr.jpeg",
     layout="centered"
 )
 
 
 # PAGE TITLE
-st.title("🌾 AgroIntelNG")
+st.title("AgroIntelNG")
 st.write("Check the best way to handle your maize and beans in seconds to avoid loss.")
 
 # LOAD DATA

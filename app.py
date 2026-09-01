@@ -5,14 +5,14 @@ from rule_engine import load_data, assess
 # PAGE SETTINGS
 st.set_page_config(
     page_title="Holdr",
-    page_icon="C:/Users/STUTERN/Downloads/Holdr/Holdr.jpeg",
+    page_icon="C:/Users/STUTERN/Downloads/Holdr/Holdr.jpg",
     layout="centered"
 )
 
 # PAGE TITLE & LOGO
 col1, col2 = st.columns([1, 6])
 with col1:
-    st.image("C:/Users/STUTERN/Downloads/Holdr/Holdr.jpeg", width=70)
+    st.image("C:/Users/STUTERN/Downloads/Holdr/Holdr.jpg", width=70)
 with col2:
     st.title("Holdr")
 

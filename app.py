@@ -4,15 +4,17 @@ from rule_engine import load_data, assess
 
 # PAGE SETTINGS
 st.set_page_config(
-    page_title="AgroIntelNG",
+    page_title="Holdr",
     page_icon="C:/Users/STUTERN/Downloads/Holdr/Holdr.jpeg",
     layout="centered"
 )
 
-
-# PAGE TITLE
-st.title("AgroIntelNG")
-st.write("Check the best way to handle your maize and beans in seconds to avoid loss.")
+# PAGE TITLE & LOGO
+col1, col2 = st.columns([1, 6])
+with col1:
+    st.image("C:/Users/STUTERN/Downloads/Holdr/Holdr.jpeg", width=70)
+with col2:
+    st.title("Holdr")
 
 # LOAD DATA
 try:

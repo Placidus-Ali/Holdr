@@ -5,14 +5,14 @@ from rule_engine import load_data, assess
 # PAGE SETTINGS
 st.set_page_config(
     page_title="Holdr",
-    page_icon="Holdr.jpg",
+    page_icon="Holdr.jpeg",
     layout="centered"
 )
 
 # PAGE TITLE & LOGO
 col1, col2 = st.columns([1, 6])
 with col1:
-    st.image("Holdr.jpg", width=70)
+    st.image("Holdr.jpeg", width=70)
 with col2:
     st.title("Holdr")
 
@@ -258,7 +258,7 @@ if st.button("🔍 Assess Grain", type="primary", use_container_width=True):
     st.divider()
     st.caption(
         """
-        AgroIntelNG is a rule-based agricultural decision-support system. Recommendations
+        Holdr is a rule-based agricultural decision-support system. Recommendations
         are based on the agricultural rules contained in the supplied datasets.
         """
     )

@@ -5,7 +5,7 @@ from rule_engine import load_data, assess
 # PAGE SETTINGS
 st.set_page_config(
     page_title="Holdr",
-    layout="right"
+    layout="centered"
 )
 
 # PAGE TITLE

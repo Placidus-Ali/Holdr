@@ -1,18 +1,22 @@
 import streamlit as st
+from pathlib import Path
 from rule_engine import load_data, assess
 
 
 # PAGE SETTINGS
+BASE_DIR = Path(__file__).parent
+LOGO_PATH = BASE_DIR / "Holdr.jpeg"
+
 st.set_page_config(
     page_title="Holdr",
-    page_icon="Holdr.jpeg",
+    page_icon=str(LOGO_PATH),
     layout="centered"
 )
 
 # PAGE TITLE & LOGO
 col1, col2 = st.columns([1, 6])
 with col1:
-    st.image("Holdr.jpeg", width=70)
+    st.image(str(LOGO_PATH), width=70)
 with col2:
     st.title("Holdr")
 

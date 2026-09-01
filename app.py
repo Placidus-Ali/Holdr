@@ -5,7 +5,7 @@ from rule_engine import load_data, assess
 
 # PAGE SETTINGS
 BASE_DIR = Path(__file__).parent
-LOGO_PATH = BASE_DIR / "Holdr.jpeg"
+LOGO_PATH = BASE_DIR / "Holdr.jpg"
 
 st.set_page_config(
     page_title="Holdr",

@@ -1,12 +1,11 @@
 import streamlit as st
-from pathlib import Path
 from rule_engine import load_data, assess
 
 
 # PAGE SETTINGS
 st.set_page_config(
     page_title="Holdr",
-    layout="centered"
+    layout="right"
 )
 
 # PAGE TITLE

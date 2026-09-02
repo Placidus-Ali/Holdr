@@ -1,6 +1,14 @@
 import streamlit as st
+import os
+from PIL import Image
 from rule_engine import load_data, assess
+print("Imported Libraries")
 
+
+# Getting the directory path and loading image 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+image_path = os.path.join(script_dir, "Holdr.jpeg")
+image = Image.open(image_path)
 
 # PAGE SETTINGS
 st.set_page_config(
@@ -9,7 +17,8 @@ st.set_page_config(
 )
 
 # PAGE TITLE
-st.title("Holdr")
+# st.title("Holdr")
+st.image(image)
 
 # LOAD DATA
 try:

@@ -24,7 +24,7 @@ The rule engine executes a rule-based evaluation pipeline designed for speed and
 1. **Telemetry Ingestion:** Gathered data points covering critical storage parameters (e.g., grain moisture content, ambient temperature, relative humidity, and storage duration).
 2. **Threshold Rule Definition:** Establishing domain-specific agronomic and commercial thresholds (e.g., critical moisture ceilings for maize or beans to prevent mold growth and mycotoxin development).
 3. **Condition Evaluation & State Assessment:** Processing input parameters through a cascading set of evaluation rules to classify current storage health (e.g., *Safe*, *Warning*, or *Critical Spoilage Risk*).
-4. **Actionable Recommendation Generation:** Translating evaluation outputs into structured recommendations (such as immediate aeration, drying, or strategic market release based on holding duration and price trends).
+4. **Actionable Recommendation:** Translating evaluation outputs into structured recommendations (such as immediate aeration, drying, or strategic market release based on holding duration and price trends).
 
 ---
 

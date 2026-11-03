@@ -29,7 +29,7 @@ The rule engine executes a rule-based evaluation pipeline designed for speed and
 ---
 
 ## The Results
-* Successfully implemented a robust, programmatic rule engine that automates complex post-harvest safety checks and inventory evaluations.
+* Successfully implemented a robust rule-based engine that automates complex post-harvest safety checks and inventory evaluations.
 * Eliminated latency in risk detection by instantly flagging unsafe storage parameters before physical grain degradation occurs.
 * Provided a modular, extensible backend architecture that can be seamlessly integrated into broader FastAPI backends, web dashboards, or offline RAG/AI assistants.
 

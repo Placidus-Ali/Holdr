@@ -47,7 +47,7 @@ cd Holdr
 
 # Run or import the rule engine script
 python rule_engine.py
-
+```
 
 ## Here is the App
 https://holdr-aipostharvestmanagementplatform.streamlit.app/

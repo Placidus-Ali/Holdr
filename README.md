@@ -1,7 +1,7 @@
 # 🌾 Holdr - Grain Post-Harvest Decision Engine
 
 ## Description of the Project
-**Holdr** (also conceptualized as AgroIntel) is an AI-powered post-harvest management and grain telemetry platform. It is engineered to provide actionable storage, inventory monitoring, and sales-timing recommendations for grain farmers and commodity aggregators. This specific module (`rule_engine.py`) serves as the core decision-making backend, evaluating real-time telemetry, storage conditions, and market parameters against agronomic thresholds to automate intelligent post-harvest decision support.
+**Holdr** (formerly AgroIntel) is an AI-powered post-harvest management and grain telemetry platform. It is engineered to provide actionable storage, inventory monitoring, and sales-timing recommendations for grain farmers and commodity aggregators. This specific module (`rule_engine.py`) serves as the core decision-making backend, evaluating real-time telemetry, storage conditions, and market parameters against agronomic thresholds to automate intelligent post-harvest decision support.
 
 ---
 

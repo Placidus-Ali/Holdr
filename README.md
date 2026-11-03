@@ -20,7 +20,7 @@ The module is built using clean, high-performance Python programming standards:
 ---
 
 ## The Methodology
-The rule engine executes a deterministic, rule-based evaluation pipeline designed for speed and reliability:
+The rule engine executes a rule-based evaluation pipeline designed for speed and reliability:
 1. **Telemetry Ingestion:** Receiving real-time or batch sensor data points covering critical storage parameters (e.g., grain moisture content, ambient temperature, relative humidity, and storage duration).
 2. **Threshold Rule Definition:** Establishing domain-specific agronomic and commercial thresholds (e.g., critical moisture ceilings for maize or beans to prevent mold growth and mycotoxin development).
 3. **Condition Evaluation & State Assessment:** Processing input parameters through a cascading set of evaluation rules to classify current storage health (e.g., *Safe*, *Warning*, or *Critical Spoilage Risk*).
